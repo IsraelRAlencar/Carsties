@@ -78,4 +78,22 @@ public class AuctionsController : ControllerBase
 
         return BadRequest("Erro while updating auction.");
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAuction(Guid id)
+    {
+        var auction = await _context.Auctions.FindAsync(id);
+
+        if (auction == null) return NotFound();
+
+        // TODO: check seller == username
+
+        _context.Auctions.Remove(auction);
+
+        var result = await _context.SaveChangesAsync() > 0;
+        
+        if (!result) return BadRequest("Error while deleting the auction.");
+
+        return Ok();
+    }
 }
