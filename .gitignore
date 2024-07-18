@@ -365,3 +365,5 @@ FodyWeavers.xsd
 # App Settings
 appsettings.json
 /EFCore.WebAPI/appsettings.json
+src/AuctionService/obj/Debug/net8.0/AuctionService.AssemblyInfoInputs.cache
+src/AuctionService/obj/Debug/net8.0/AuctionService.AssemblyInfo.cs
