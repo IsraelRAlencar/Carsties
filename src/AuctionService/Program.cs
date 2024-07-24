@@ -16,7 +16,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMassTransit(x =>
 {
     x.AddEntityFrameworkOutbox<AuctionDbContext>(o => {
-        o.QueryDelay = TimeSpan.FromSeconds(15);
+        o.QueryDelay = TimeSpan.FromSeconds(900);
 
         o.UsePostgres();
         o.UseBusOutbox();
