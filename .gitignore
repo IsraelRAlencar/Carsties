@@ -488,3 +488,5 @@ src/IdentityService/keys
 
 # Docker Compose
 docker-compose.yml
+.vscode/launch.json
+.vscode/tasks.json
