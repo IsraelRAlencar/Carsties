@@ -36,7 +36,7 @@ public class Index : PageModel
     [BindProperty]
     public InputModel Input { get; set; } = default!;
 
-    public async Task<IActionResult> OnGet(string? returnUrl)
+    public async Task<IActionResult> OnGet(string returnUrl)
     {
         if (!await SetViewModelAsync(returnUrl))
         {
@@ -129,7 +129,7 @@ public class Index : PageModel
         return Page();
     }
 
-    private async Task<bool> SetViewModelAsync(string? returnUrl)
+    private async Task<bool> SetViewModelAsync(string returnUrl)
     {
         ArgumentNullException.ThrowIfNull(returnUrl);
 

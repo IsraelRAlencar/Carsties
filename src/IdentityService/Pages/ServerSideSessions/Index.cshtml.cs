@@ -21,19 +21,19 @@ namespace IdentityService.Pages.ServerSideSessions
         public QueryResult<UserSession>? UserSessions { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string? DisplayNameFilter { get; set; }
+        public string DisplayNameFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string? SessionIdFilter { get; set; }
+        public string SessionIdFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string? SubjectIdFilter { get; set; }
+        public string SubjectIdFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string? Token { get; set; }
+        public string Token { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string? Prev { get; set; }
+        public string Prev { get; set; }
 
         public async Task OnGet()
         {
@@ -51,7 +51,7 @@ namespace IdentityService.Pages.ServerSideSessions
         }
 
         [BindProperty]
-        public string? SessionId { get; set; }
+        public string SessionId { get; set; }
 
         public async Task<IActionResult> OnPost()
         {
