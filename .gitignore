@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 # Identity Service
 src/IdentityService/keys
+
+# Docker Compose
+docker-compose.yml
