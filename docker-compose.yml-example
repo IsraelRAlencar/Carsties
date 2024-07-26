@@ -21,4 +21,19 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-  
+  auction-svc:
+    image: [user]/auction-svc:latest
+    build:
+      context: .
+      dockerfile: src/AuctionService/dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMq__Host=rabbitmq
+      - ConnectionStrings__DefaultConnection=[connection_string]
+      - IdentityServiceUrl=http://identity-svc
+    ports:
+      - 7001:80
+    depends_on:
+      - postgres
+      - rabbitmq
