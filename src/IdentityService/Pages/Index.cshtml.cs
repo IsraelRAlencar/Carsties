@@ -11,7 +11,7 @@ namespace IdentityService.Pages.Home;
 [AllowAnonymous]
 public class Index : PageModel
 {
-    public Index(IdentityServerLicense? license = null)
+    public Index(IdentityServerLicense license = null)
     {
         License = license;
     }
@@ -23,5 +23,5 @@ public class Index : PageModel
             ?.InformationalVersion.Split('+').First()
             ?? "unavailable";
     }
-    public IdentityServerLicense? License { get; }
+    public IdentityServerLicense License { get; }
 }

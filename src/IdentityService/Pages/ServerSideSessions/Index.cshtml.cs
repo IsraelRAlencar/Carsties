@@ -11,14 +11,14 @@ namespace IdentityService.Pages.ServerSideSessions
 {
     public class IndexModel : PageModel
     {
-        private readonly ISessionManagementService? _sessionManagementService;
+        private readonly ISessionManagementService _sessionManagementService;
 
-        public IndexModel(ISessionManagementService? sessionManagementService = null)
+        public IndexModel(ISessionManagementService sessionManagementService = null)
         {
             _sessionManagementService = sessionManagementService;
         }
 
-        public QueryResult<UserSession>? UserSessions { get; set; }
+        public QueryResult<UserSession> UserSessions { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string DisplayNameFilter { get; set; }

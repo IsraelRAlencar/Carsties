@@ -60,7 +60,7 @@ public class Consent : PageModel
             return RedirectToPage("/Home/Error/Index");
         }
 
-        CompleteBackchannelLoginRequest? result = null;
+        CompleteBackchannelLoginRequest result = null;
 
         // user clicked 'no' - send back the standard 'access_denied' response
         if (Input.Button == "no")
