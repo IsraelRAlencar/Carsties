@@ -18,7 +18,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMassTransit(x =>
 {
     x.AddEntityFrameworkOutbox<AuctionDbContext>(o => {
-        o.QueryDelay = TimeSpan.FromSeconds(900);
+        o.QueryDelay = TimeSpan.FromSeconds(5);
 
         o.UsePostgres();
         o.UseBusOutbox();
@@ -59,7 +59,7 @@ app.MapControllers();
 
 try
 {
-    DbInitializer.IniDb(app);
+    DbInitializer.InitDb(app);
 }
 catch (Exception e)
 {
