@@ -12,12 +12,34 @@ public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsync
     private readonly CustomWebAppFactory _factory;
     private readonly HttpClient _httpClient;
     private const string GT_ID = "afbee524-5972-4075-8800-7d1f9d7b0a0c";
-    private const string INVALID_ID = "aaaaa000-0000-0000-0000-0a0a0a0b0a0a";
 
     public AuctionControllerTests(CustomWebAppFactory factory)
     {
         _factory = factory;
         _httpClient = _factory.CreateClient();
+    }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+    public Task DisposeAsync()
+    {
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AuctionDbContext>();
+        DbHelper.ReinitDbForTests(db);
+        return Task.CompletedTask;
+    }
+
+    private CreateAuctionDto GetAuctionForCreate()
+    {
+        return new CreateAuctionDto
+        {
+            Make = "test",
+            Model = "testModel",
+            ImageUrl = "test",
+            Color = "test",
+            Mileage = 10,
+            Year = 10,
+            ReservePrice = 10
+        };
     }
 
     [Fact]
@@ -124,7 +146,7 @@ public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsync
     {
         _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("bob"));
 
-        var response = await _httpClient.DeleteAsync($"api/auctions/{INVALID_ID}");
+        var response = await _httpClient.DeleteAsync($"api/auctions/{Guid.NewGuid()}");
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
@@ -137,29 +159,5 @@ public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsync
         var response = await _httpClient.DeleteAsync($"api/auctions/{GT_ID}");
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-    }
-
-    public Task InitializeAsync() => Task.CompletedTask;
-    
-    public Task DisposeAsync()
-    {
-        using var scope = _factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<AuctionDbContext>();
-        DbHelper.ReinitDbForTests(db);
-        return Task.CompletedTask;
-    }
-
-    private CreateAuctionDto GetAuctionForCreate()
-    {
-        return new CreateAuctionDto
-        {
-            Make = "test",
-            Model = "testModel",
-            ImageUrl = "test",
-            Color = "test",
-            Mileage = 10,
-            Year = 10,
-            ReservePrice = 10
-        };
     }
 }
