@@ -1,11 +1,10 @@
 import Image from "next/image";
+import Listing from "./auctions/Listing";
 
 export default function Home() {
   return (
     <div>
-      <h3 className="text-3xl font-semibold">
-        Content is here!
-      </h3>
+      <Listing />
     </div>
   );
 }
