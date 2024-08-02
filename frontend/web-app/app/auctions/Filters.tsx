@@ -57,6 +57,7 @@ export default function Filters() {
                             key={value}
                             onClick={() => setParams({filterBy: value})}
                             color={`${filterBy === value ? 'red' : 'gray'}`}
+                            className='enabled:hover:bg-red-100 enabled:hover:text-red-500 focus:ring-0'
                         >
                             <Icon className='mr-3 h-4 w-4' />
                             {label}
@@ -73,6 +74,7 @@ export default function Filters() {
                             key={value}
                             onClick={() => setParams({orderBy: value})}
                             color={`${orderBy === value ? 'red' : 'gray'}`}
+                            className='enabled:hover:bg-red-100 enabled:hover:text-red-500 focus:ring-0'
                         >
                             <Icon className='mr-3 h-4 w-4' />
                             {label}
@@ -86,9 +88,10 @@ export default function Filters() {
                 <Button.Group>
                     {pageSizeButtons.map((value, i) => (
                         <Button key={i} 
-                        onClick={() => setParams({pageSize: value})}
-                        color={`${pageSize === value ? 'red' : 'gray'}`}
-                        className='focus:ring-0'>
+                            onClick={() => setParams({pageSize: value})}
+                            color={`${pageSize === value ? 'red' : 'gray'}`}
+                            className='enabled:hover:bg-red-100 enabled:hover:text-red-500 focus:ring-0'
+                        >
                             {value}
                         </Button>
                     ))}
