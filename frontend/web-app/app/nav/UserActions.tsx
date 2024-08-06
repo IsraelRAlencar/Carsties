@@ -17,7 +17,7 @@ export default function UserActions({user}: Props) {
         <Dropdown className='z-50' color={'red'} label={`Welcome ${user.name}`} dismissOnClick={false}>
             <Dropdown.Item icon={HiUser}><Link href='/'>My Auctions</Link></Dropdown.Item>
             <Dropdown.Item icon={AiFillTrophy}><Link href='/'>Auctions Won</Link></Dropdown.Item>
-            <Dropdown.Item icon={AiFillCar}><Link href='/'>Sell my Car</Link></Dropdown.Item>
+            <Dropdown.Item icon={AiFillCar}><Link href='/auctions/create'>Sell my Car</Link></Dropdown.Item>
             <Dropdown.Item icon={HiCog}><Link href='/session'>Session (dev only)</Link></Dropdown.Item>
             <DropdownDivider />
             <Dropdown.Item icon={AiOutlineLogout} onClick={() => signOut({callbackUrl: '/'})} >Sign Out</Dropdown.Item>
