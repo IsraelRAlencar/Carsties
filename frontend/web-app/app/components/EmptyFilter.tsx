@@ -33,7 +33,7 @@ export default function EmptyFilter({
                         outline 
                         onClick={reset}
                     >
-                        RemoveFilters
+                        Remove Filters
                     </Button>
                 )}
                 {showLogin && (
