@@ -62,14 +62,13 @@ async function handleResponse(response: Response) {
 
     if (response.ok) {
         return data || response.statusText;
-    }
-    else {
+    } else {
         const error = {
             status: response.status,
             message: response.statusText
         }
         
-        return error;
+        return {error};
     }
 }
 
