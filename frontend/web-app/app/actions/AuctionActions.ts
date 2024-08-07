@@ -1,14 +1,11 @@
 'use server'
 
+import { fetchWrapper } from "@/lib/fetchWrapper";
 import { Auction, PagedResult } from "../types";
 import { getTokenWorkaround } from "./authActions";
 
 export async function getData(query: string): Promise<PagedResult<Auction>> {
-    const res = await fetch(`http://localhost:6001/search${query}`);
-
-    if (!res.ok) throw new Error('Failed to fetch data');
-
-    return res.json();
+    return await fetchWrapper.get(`search/${query}`)
 }
 
 export async function UpdateAuctionTest() {
