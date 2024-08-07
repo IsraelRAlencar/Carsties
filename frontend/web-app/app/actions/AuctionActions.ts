@@ -1,6 +1,5 @@
 'use server'
 
-import { getToken } from "next-auth/jwt";
 import { Auction, PagedResult } from "../types";
 import { getTokenWorkaround } from "./authActions";
 
