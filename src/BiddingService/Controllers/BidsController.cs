@@ -1,5 +1,7 @@
 using System;
 using System.Net.NetworkInformation;
+using AutoMapper;
+using BiddingService.DTOs;
 using BiddingService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +13,16 @@ namespace BiddingService.Controllers;
 [Route("api/[controller]")]
 public class BidsController : ControllerBase
 {
+    private readonly IMapper _mapper;
+
+    public BidsController(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<Bid>> PlaceBid(string auctionId, int amount)
+    public async Task<ActionResult<BidDto>> PlaceBid(string auctionId, int amount)
     {
         var auction = await DB.Find<Auction>().OneAsync(auctionId);
 
@@ -59,11 +68,11 @@ public class BidsController : ControllerBase
             }
 
         await DB.SaveAsync(bid);
-        return Ok(bid);
+        return Ok(_mapper.Map<BidDto>(bid));
     }
 
     [HttpGet("{auctionId}")]
-    public async Task<ActionResult<List<Bid>>> GetBidsForAuction(string auctionId)
+    public async Task<ActionResult<List<BidDto>>> GetBidsForAuction(string auctionId)
     {
         var auction = await DB.Find<Auction>().OneAsync(auctionId);
 
@@ -78,6 +87,6 @@ public class BidsController : ControllerBase
             .Sort(b => b.Descending(x => x.BidTime))
             .ExecuteAsync();
 
-        return bids;
+        return bids.Select(_mapper.Map<BidDto>).ToList();
     }
 }
