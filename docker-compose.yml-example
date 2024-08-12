@@ -77,7 +77,7 @@ services:
     ports:
       - 6001:80
   bid-svc:
-    image: israelralencar/bid-svc:latest
+    image: [user]/bid-svc:latest
     build:
       context: .
       dockerfile: src/BiddingService/Dockerfile
@@ -92,4 +92,17 @@ services:
       - 7003:80
     depends_on:
       - mongodb
+      - rabbitmq
+  notify-svc:
+    image: [user]/notify-svc:latest
+    build:
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMq__Host=rabbitmq
+    ports:
+      - 7004:80
+    depends_on:
       - rabbitmq
