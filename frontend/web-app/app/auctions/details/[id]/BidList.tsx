@@ -41,7 +41,7 @@ export default function BidList({user, auction}: Props) {
         <div className="rounded-lg shadow-md">
             <div className="py-2 px-4 bg-white">
                 <div className='sticky top-0 bg-white p-2'>
-                    <Heading title={`Current high bid is $${numberWithCommas(highBid)}`} />
+                    <Heading title={`Current High Bid is $${numberWithCommas(highBid)}`} />
                 </div>
             </div>
 
@@ -58,7 +58,18 @@ export default function BidList({user, auction}: Props) {
             </div>
 
             <div className="px-2 pb-2 text-gray-500">
+                {!user ? (
+                    <div className="flex items-center justify-center p-2 text-lg font-semibold">
+                        Please Login to Make a Bid.
+                    </div>
+                ) : user && user.username === auction.seller ? (
+                    <div className="flex items-center justify-center p-2 text-lg font-semibold">
+                        You Cannot Bid on your own Auction.
+                    </div>
+                ) : (
+                    
                 <BidForm auctionId={auction.id} highBid={highBid} />
+                )}
             </div>
             
         </div>
