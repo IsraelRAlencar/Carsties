@@ -7,7 +7,7 @@ import React from 'react'
 export default function LoginButton() {
   return (
     <Button className='enabled:hover:bg-red-100 enabled:hover:text-red-500 focus:ring-0 bg-red-400' 
-        outline onClick={() => signIn('id-server', {callbackUrl: '/'})}>
+        outline onClick={() => signIn('id-server', {callbackUrl: '/'}, {prompt: 'login'})}>
         Login
     </Button>
   )
